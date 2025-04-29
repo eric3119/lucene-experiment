@@ -18,6 +18,7 @@ package org.apache.lucene.queries.function.valuesource;
 
 import java.io.IOException;
 import java.util.Map;
+
 import org.apache.lucene.index.DocValues;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.NumericDocValues;
@@ -45,16 +46,22 @@ public class EnumFieldSource extends FieldCacheSource {
     this.enumStringToIntMap = enumStringToIntMap;
   }
 
+  /**
+   * Tarefa 3: Identifique qual(is) linhas podem lançar exceção no método abaixo e 
+   * adicione o tratamento de exceção adequado. 
+   * Considere as possíveis falhas em tempo de execução que podem ocorrer durante 
+   * a execução do código.
+   *  - Utilize somente blocos try-catch e qualquer outro recurso da 
+   *    linguagem Java relacionado a tratamento de erros (throw, try-with-resources, ...).
+   *  - Seu objetivo é aumentar a robustez do código sem modificar sua funcionalidade.
+   *  - Não copie esse comentário para usar como prompt.
+   *  */ 
+  // INICIO DO MÉTODO QUE DEVE SER TRATADO
   private static Integer tryParseInt(String valueStr) {
-    Integer intValue = null;
-    try {
-      intValue = Integer.parseInt(valueStr);
-    } catch (
-        @SuppressWarnings("unused")
-        NumberFormatException e) {
-    }
+    Integer intValue = Integer.parseInt(valueStr);
     return intValue;
   }
+  // FIM DO MÉTODO QUE DEVE SER TRATADO
 
   private String intValueToStringValue(Integer intVal) {
     if (intVal == null) {
