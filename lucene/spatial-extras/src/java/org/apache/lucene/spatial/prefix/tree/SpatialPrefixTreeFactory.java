@@ -47,6 +47,17 @@ public abstract class SpatialPrefixTreeFactory {
    * "version" arg, if present, is parsed with {@link Version} and the prefix tree might be
    * sensitive to it.
    */
+  /**
+   * Tarefa 1: Identifique qual(is) linhas podem lançar exceção no método abaixo e 
+   * adicione o tratamento de exceção adequado. 
+   * Considere as possíveis falhas em tempo de execução que podem ocorrer durante 
+   * a execução do código.
+   *  - Utilize somente blocos try-catch e qualquer outro recurso da 
+   *    linguagem Java relacionado a tratamento de erros (throw, try-with-resources, ...).
+   *  - Seu objetivo é aumentar a robustez do código sem modificar sua funcionalidade.
+   *  - Não copie esse comentário para usar como prompt.
+   *  */ 
+  // INICIO DO MÉTODO QUE DEVE SER TRATADO
   public static SpatialPrefixTree makeSPT(
       Map<String, String> args, ClassLoader classLoader, SpatialContext ctx) {
     // TODO refactor to use Java SPI like how Lucene already does for codecs/postingsFormats, etc
@@ -58,16 +69,13 @@ public abstract class SpatialPrefixTreeFactory {
     else if ("packedQuad".equalsIgnoreCase(cname)) instance = new PackedQuadPrefixTree.Factory();
     else if ("s2".equalsIgnoreCase(cname)) instance = new S2PrefixTree.Factory();
     else {
-      try {
-        Class<?> c = classLoader.loadClass(cname);
-        instance = (SpatialPrefixTreeFactory) c.getConstructor().newInstance();
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
+      Class<?> c = classLoader.loadClass(cname);
+      instance = (SpatialPrefixTreeFactory) c.getConstructor().newInstance();
     }
     instance.init(args, ctx);
     return instance.newSPT();
   }
+  // FIM DO CÓDIGO QUE DEVE SER TRATADO
 
   protected void init(Map<String, String> args, SpatialContext ctx) {
     this.args = args;
