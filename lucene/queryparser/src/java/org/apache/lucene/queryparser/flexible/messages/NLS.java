@@ -125,19 +125,27 @@ public class NLS {
     }
   }
 
+  /**
+   * Tarefa 2: Identifique qual(is) linhas podem lançar exceção no método abaixo e 
+   * adicione o tratamento de exceção adequado. 
+   * Considere as possíveis falhas em tempo de execução que podem ocorrer durante 
+   * a execução do código.
+   *  - Utilize somente blocos try-catch e qualquer outro recurso da 
+   *    linguagem Java relacionado a tratamento de erros (throw, try-with-resources, ...).
+   *  - Seu objetivo é aumentar a robustez do código sem modificar sua funcionalidade.
+   *  - Não copie esse comentário para usar como prompt.
+   *  */ 
+  // INICIO DO MÉTODO QUE DEVE SER TRATADO
   private static void loadfieldValue(Field field, Class<? extends NLS> clazz) {
     int MOD_EXPECTED = Modifier.PUBLIC | Modifier.STATIC;
     int MOD_MASK = MOD_EXPECTED | Modifier.FINAL;
     if ((field.getModifiers() & MOD_MASK) != MOD_EXPECTED) return;
 
     // Set a value for this empty field.
-    try {
-      field.set(null, field.getName());
-      validateMessage(field.getName(), clazz);
-    } catch (@SuppressWarnings("unused") IllegalArgumentException | IllegalAccessException e) {
-      // should not happen
-    }
+    field.set(null, field.getName());
+    validateMessage(field.getName(), clazz);
   }
+  // FIM DO MÉTODO QUE DEVE SER TRATADO
 
   /**
    * @param key - Message Key
